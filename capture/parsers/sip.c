@@ -44,6 +44,7 @@ void moloch_parser_init()
     SIPto = moloch_field_define("sip", "lotermfield", "sip.to", "SIP To", "sip.to", "SIP To",
 	    MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);	
 
+
     moloch_parsers_classifier_register_udp("sip", NULL, 0, (const unsigned char *)"SIP/2.0", 1, sip_udp_classify);
     moloch_parsers_classifier_register_udp("sip", NULL, 0, (const unsigned char *)"REGISTER sip:", 1, sip_udp_classify);
     moloch_parsers_classifier_register_udp("sip", NULL, 0, (const unsigned char *)"INVITE sip:", 1, sip_udp_classify);
