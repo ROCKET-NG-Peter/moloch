@@ -29,19 +29,19 @@ LOCAL void sip_udp_classify(MolochSession_t *session, const unsigned char *UNUSE
 void moloch_parser_init()
 {
 
-	SIPmessageField = moloch_field_define("sip", "lotermfield", "sip.message", "MESSAGE", "sip.message", "FULL SIP MESSAGE",
+	SIPmessageField = moloch_field_define("sip", "lotermfield", "sip.message", "SIP Message", "sip.message", "SIP Message",
         MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-	SIPcallIDField = moloch_field_define("sip", "lotermfield", "sip.callid", "callID", "sip.callid", "Call ID",
+	SIPcallIDField = moloch_field_define("sip", "lotermfield", "sip.callid", "Call ID", "sip.callid", "Call ID",
 		MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-	SIPrequests = moloch_field_define("sip", "lotermfield", "sip.requests", "REQUESTS", "sip.requests", "REQUESTS",
+	SIPrequests = moloch_field_define("sip", "lotermfield", "sip.requests", "SIP Requests", "sip.requests", "SIP Requests",
 		MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-    SIPresponses = moloch_field_define("sip", "lotermfield", "sip.requests", "RESPONSES", "sip.responses", "RESPONSES",
+    SIPresponses = moloch_field_define("sip", "lotermfield", "sip.requests", "SIP Responses", "sip.responses", "SIP Responses",
 		MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-    SIPvia = moloch_field_define("sip", "lotermfield", "sip.via", "Via", "sip.via", "via",
+    SIPvia = moloch_field_define("sip", "lotermfield", "sip.via", "SIP VIA", "sip.via", "SIP VIA",
 	    MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-    SIPfrom = moloch_field_define("sip", "lotermfield", "sip.from", "From", "sip.froma", "from",
+    SIPfrom = moloch_field_define("sip", "lotermfield", "sip.from", "From", "SIP From", "SIP From",
 	    MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);
-    SIPto = moloch_field_define("sip", "lotermfield", "sip.to", "To", "sip.to", "to",
+    SIPto = moloch_field_define("sip", "lotermfield", "sip.to", "To", "SIP To", "to",
 	    MOLOCH_FIELD_TYPE_STR_GHASH,  MOLOCH_FIELD_FLAG_CNT, (char *)NULL);	
 
     moloch_parsers_classifier_register_udp("sip", NULL, 0, (const unsigned char *)"SIP/2.0", 1, sip_udp_classify);
