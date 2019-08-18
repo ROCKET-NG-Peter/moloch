@@ -1,0 +1,10 @@
+if (session.sip)
+  div.sessionDetailMeta.bold SIP
+  dl.sessionDetailMeta(suffix="sip")
+    +arrayList(session.sip, "message", "SIP Messages", "sip.message")
+    +arrayList(session.sip, "callid", "Call ID", "sip.callid")
+    +arrayList(session.sip, "requests", "SIP Requests", "sip.requests")
+    +arrayList(session.sip, "responses", "SIP Responses", "sip.responses")
+    +arrayList(session.sip, "via", "VIA", "sip.via")
+	+arrayList(session.sip, "from", "From", "sip.from")
+	+arrayList(session.sip, "to", "TO, "sip.to")
