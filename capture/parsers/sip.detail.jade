@@ -1,6 +1,6 @@
 if (session.sip)
   div.sessionDetailMeta.bold sip
-  dl.sessionDetailMeta(suffix="sip")
+  dl.sessionDetailMeta
     +arrayList(session.sip, "sipmessage", "SIP Message", "sip.message")
     +arrayList(session.sip, "sipcallid", "SIP Call ID", "sip.callid")
     +arrayList(session.sip, "siprequests", "SIP Requests", "sip.requests")
