@@ -21,7 +21,7 @@ LOCAL int sip_udp_parser(MolochSession_t *session, void *UNUSED(uw), const unsig
         sip_lines = strtok_r(data, "\r\n", &sip_lines_end_str);
         while (sip_lines != NULL)
         {
-          printf("-->%s\n", sip_lines);
+
 
 
            if(StartsWith(sip_lines, "SIP/2.0 ")){
@@ -29,6 +29,7 @@ LOCAL int sip_udp_parser(MolochSession_t *session, void *UNUSED(uw), const unsig
              char *resp_word =NULL;
              resp_word = strtok_r(sip_lines, " ", &resp_word_end_str);
              resp_word = strtok_r(NULL, " ", &resp_word_end_str);
+             moloch_field_string_add(SSIPresponses, session, (char*)resp_word, 3, TRUE);
              printf("SIP-RESPONSE: %s\n", resp_word);       
            }
            else {}
