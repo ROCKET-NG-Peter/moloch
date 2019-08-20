@@ -18,7 +18,7 @@ LOCAL int sip_udp_parser(MolochSession_t *session, void *UNUSED(uw), const unsig
 
         char *sip_lines_end_str;
         char* sip_lines = NULL;
-        sip_lines = strtok_r(data, "\r\n", &sip_lines_end_str);
+        sip_lines = strtok_r((char*)data, "\r\n", &sip_lines_end_str);
         while (sip_lines != NULL)
         {
 
