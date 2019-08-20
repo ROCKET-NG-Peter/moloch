@@ -1,0 +1,60 @@
+systemctl stop molochcapture.service
+systemctl stop molochviewer.service
+systemctl start molochviewer.service
+systemctl start molochcapture.service
+
+
+
+ rm -Rf /opt/moloch
+ cd /opt
+ git clone --single-branch --branch SIP-Test https://github.com/ROCKET-NG-Peter/moloch
+cd moloch
+./easybutton-build.sh --install
+
+
+ /data/moloch/db/db.pl 10.10.27.11:9200 wipe
+ /bin/rm -f /cap1/moloch/raw/*
+
+systemctl start molochviewer.service
+systemctl start molochcapture.service
+
+
+#include <string.h>
+#include <stdio.h>
+
+int StartsWith(const char *a, const char *b)
+{
+           if(strncmp(a, b, strlen(b)) == 0) return 1;
+              return 0;
+}
+
+int main (void)
+{
+        int i=0;
+        char *responses[3];
+        char sip_work[] = "SIP/2.0 200 OK\r\nVia: SIP/2.0/UDP 192.168.10.20:5070;branch=z9hG4bKPj963d8534-d804-445a-8505-8d821f874adb;received=185.148.93.119;rport=5070\r\nFrom: <sip:gw_2_alphaphone@192.168.10.20>;tag=ec02b377-5474-4ce6-a71a-5ea4bd2aa446\r\nTo: <sip:185.67.108.5>;tag=abc123\r\nCall-ID: 9e6dd2f7-569d-480a-bfa1-bdd9ea7f6817\r\nCSeq: 13809 OPTIONS\r\nContact: <sip:ANONYMOUS@185.67.108.5:5060>\r\nAllow: INVITE,ACK,CANCEL,BYE,PRACK,OPTIONS\r\nAccept: application/sdp, application/isup, application/dtmf, application/dtmf-relay, multipart/mixed\r\nSupported: timer,100rel,replaces\r\nContent-Length: 0\r\n\r\nOPTIONS sip:185.67.108.5:5060 SIP/2.0\r\nVia: SIP/2.0/UDP 212.24.116.146;branch=z9hG4bK3c59.77acc61bebb27d4e6d9853038702dd67.0;rport\r\nMax-Forwards: 69\r\nFrom: \"pbxservice\" <sip:4312929021@212.24.116.146>;tag=as6c435e98\r\nTo: <sip:185.67.108.5:5060>\r\nContact: <sip:4312929021@212.24.116.146>\r\nCall-ID: 26307db973ad5094346a22bc30ecb935\r\nCSeq: 102 OPTIONS\r\nUser-Agent: WildixGW 0.88.41889-wocn-5\r\nDate: Tue, 20 Aug 2019 06:20:13 GMT\r\nSession-Expires: 600\r\nMin-SE: 90\r\nAllow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY, INFO, PUBLISH\r\nSupported: replaces, timer\r\nX-Transport: udp\r\nContent-Length: 0\r\nX-Next-Hop: 185.67.108.5\r\nX-Next-Hop-Port: 5060\r\nX-Dst-Addr: extern\r\n\r\n";
+
+        char *sip_lines_end_str;
+        char* sip_lines = NULL;
+        sip_lines = strtok_r(sip_work, "\r\n", &sip_lines_end_str);
+        while (sip_lines != NULL)
+        {
+          printf("-->%s\n", sip_lines);
+
+
+           if(StartsWith(sip_lines, "SIP/2.0 ")){
+             char *resp_word_end_str = NULL;
+             char *resp_word =NULL;
+             resp_word = strtok_r(sip_lines, " ", &resp_word_end_str);
+             resp_word = strtok_r(NULL, " ", &resp_word_end_str);
+             printf("SIP-RESPONSE: %s\n", resp_word);       
+           }
+           else {}
+
+
+
+
+           sip_lines = strtok_r(NULL, "\r\n", &sip_lines_end_str);
+        }
+        return 0;
+}
