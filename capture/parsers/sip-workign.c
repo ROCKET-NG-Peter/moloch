@@ -20,6 +20,7 @@ LOCAL  int SIPto;
 LOCAL int sip_udp_parser(MolochSession_t *session, void *UNUSED(uw), const unsigned char *data, int len, int UNUSED(which))
 {
         moloch_field_string_add(SIPmessageField, session, (char*)data, len, TRUE);
+
 }
 
 LOCAL void sip_udp_classify(MolochSession_t *session, const unsigned char *UNUSED(data), int len, int UNUSED(which), void *UNUSED(uw))
